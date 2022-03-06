@@ -14,8 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('cars', function (Blueprint $table) {
-            $table->id();
+            $table->integer('id')->autoIncrement();
+            $table->string("immatriculation",7);
+            $table->String("marque",30);
+            $table->String("modele",30);
+            $table->String("couleur",30);
+            $table->foreignId("car_options_id")->constrained();
             $table->timestamps();
+
+            $table->primary(['immatriculation','modele']);
         });
     }
 
@@ -27,5 +34,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('cars');
+        Schema::drop('cars');
     }
 };
